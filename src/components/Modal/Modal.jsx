@@ -3,7 +3,7 @@ import { useState } from "react";
 import NavRadioButton from "../UI/NavRadioButton/NavRadioButton";
 import Features from "../Features/Features";
 import Reviews from "../Reviews/Reviews";
-import BookForm from "../BookForm/BookForm";
+import BookForm from "../BookCampForm/BookCampForm";
 import { formatRentPrice, getAllDetails } from "../../helpers";
 import { CamperImage, Location, Rating } from "../UI";
 
