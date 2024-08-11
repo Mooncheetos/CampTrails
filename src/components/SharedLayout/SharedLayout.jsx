@@ -1,10 +1,13 @@
 import css from "./SharedLayout.module.css";
+import Header from "../Header/Header";
 import { Suspense } from "react";
+import { PageLoader } from "../UI";
 
 const SharedLayout = ({ children }) => {
   return (
     <div className={css.container}>
-      <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+      <Header />
+      <Suspense fallback={<PageLoader />}>{children}</Suspense>
     </div>
   );
 };

@@ -1,48 +1,19 @@
-import { lazy, useEffect } from 'react';
-import { refreshUser, getAllUsers } from './redux/auth/operations.js';
-import { Routes, Route } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
-import { useDispatch, useSelector } from 'react-redux';
+import SharedLayout from "./SharedLayout/SharedLayout";
+import { Route, Routes } from "react-router-dom";
+import { lazy } from "react";
 
-import { refreshUser, getAllUsers } from './redux/auth/operations.js';
-import { selectIsRefreshing } from './redux/selectors.js';
-import { RestrictedRoute } from './components/RestrictedRoute';
-import { PrivateRoute } from './components/PrivateRoute';
-
-import SharedLayout from './components/SharedLayout/SharedLayout.jsx';
-import GoogleAuth from './components/GoogleAuth/GoogleAuth.jsx';
-import HourglassLoader from './shared/components/HourglassLoader/HourglassLoader.jsx';
-
-const HomePage = lazy(() => import('./pages/HomePage/HomePage.jsx'));
-const SignUpPage = lazy(() => import('./pages/SignUpPage/SignUpPage.jsx'));
-const SignInPage = lazy(() => import('./pages/SignInPage/SignInPage.jsx'));
-const TrackerPage = lazy(() => import('./pages/TrackerPage/TrackerPage.jsx'));
-const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage/ForgotPasswordPage.jsx'));
-const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage/ResetPasswordPage.jsx'));
-const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
+const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
+const FavoritePage = lazy(() => import("../pages/FavoritePage/FavoritePage"));
+const CatalogPage = lazy(() => import("../pages/CatalogPage/CatalogPage"));
 
 function App() {
-  const dispatch = useDispatch();
-  const isRefreshing = useSelector(selectIsRefreshing);
-
-  useEffect(() => {
-    dispatch(refreshUser());
-    dispatch(getAllUsers());
-  }, [dispatch]);
-
-  return isRefreshing ? (
-    <HourglassLoader />
-  ) : (
+  return (
     <SharedLayout>
-      <Toaster position="top-center" />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/movies" element={<MoviesPage />} />
-        <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
-          <Route path="cast" element={<MovieCast />} />
-          <Route path="reviews" element={<MovieReviews />} />
-        </Route>
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path="/catalog" element={<CatalogPage />} />
+        <Route path="/favorites" element={<FavoritePage />} />
+        <Route path="*" element={<HomePage />} />
       </Routes>
     </SharedLayout>
   );

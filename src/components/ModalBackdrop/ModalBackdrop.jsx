@@ -1,10 +1,9 @@
-import clsx from "clsx";
 import s from "./ModalBackdrop.module.css";
+import clsx from "clsx";
+import { AnimationPov } from "../../constants.js";
 import { useCallback, useEffect, useState } from "react";
-import { AnimationPov } from "../../components/constants.js";
 
 const ModalBackdrop = ({ children, onClose }) => {
-
   const [active, setActive] = useState(false);
 
   const dynamicStyle = clsx(s.backdrop, active && s.active);
@@ -37,11 +36,10 @@ const ModalBackdrop = ({ children, onClose }) => {
   }, [handleCloseModal]);
 
   return (
-    <div
-      className={dynamicStyle}
-      onClick={handleCloseModal}
-    >
-      {children}
+    <div className={dynamicStyle} onClick={handleCloseModal}>
+      <div className={s.wrapper} onClick={handleCloseModal}>
+        {children}
+      </div>
     </div>
   );
 };

@@ -1,11 +1,6 @@
 .container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     min-height: 100vh;
-    max-width: 375px;
-    flex-direction: column;
-    gap: 16px;
+    width: 1342px;
     margin: auto;
-    padding: 16px;
+    padding: 0 15px 100px;
 }
