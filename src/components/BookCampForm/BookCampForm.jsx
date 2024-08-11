@@ -1,5 +1,5 @@
 import icons from "../../assets/icons.svg";
-import css from "./BookForm.module.css";
+import css from "./BookCampForm.module.css";
 import Calendar from "../Calendar/Calendar";
 import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
