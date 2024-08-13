@@ -1,38 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { CATALOG_INITIAL_STATE } from "./initialState";
-import { getCampers, getMoreCampers } from "./operations";
+import { getCampers, getMoreCampers } from "./operations.js";
+import { CATALOG_INITIAL_STATE } from "./initialState.js";
 
 const campersSlice = createSlice({
   name: "campers",
   initialState: CATALOG_INITIAL_STATE,
+  reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getCampers.pending, (state) => {
-        state.error = null;
-        state.data = null;
-      })
       .addCase(getCampers.fulfilled, (state, action) => {
         state.data = action.payload;
-        state.nextPage = action.payload.length === 8;
+      })
+      .addCase(getMoreCampers.fulfilled, (state, action) => {
+        state.data = [...state.data, ...action.payload];
+      })
+      .addCase(getCampers.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getMoreCampers.pending, (state) => {
+        state.isLoading = true;
       })
       .addCase(getCampers.rejected, (state, action) => {
         state.error = action.payload;
-        state.nextPage = false;
-      })
-      // getMoreCampers
-      .addCase(getMoreCampers.pending, (state) => {
-        state.isLoading = true;
-        state.error = null;
-      })
-      .addCase(getMoreCampers.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.data = [...state.data, ...action.payload];
-        state.nextPage = action.payload.length === 4;
       })
       .addCase(getMoreCampers.rejected, (state, action) => {
-        state.isLoading = false;
         state.error = action.payload;
-        state.nextPage = false;
+        state.isLoading = false;
       });
   },
 });

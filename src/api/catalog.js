@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://66b201801ca8ad33d4f6191b.mockapi.io/api/v1";
+const BASE_URL = "https://66b90f6a3ce57325ac78d230.mockapi.io/api/v1";
 
 export const instance = axios.create({
   baseURL: BASE_URL,
